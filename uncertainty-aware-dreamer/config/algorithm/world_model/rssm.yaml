@@ -1,0 +1,20 @@
+# Recurrent State Space Model (cf. Hafner et al. 2020)
+defaults:
+  - wm_default
+  - _self_
+
+name: rssm
+
+model:
+  # --------------------------------------
+  # ------------- TRANSITION -------------
+  # --------------------------------------
+  transition:
+    type: r_rssm
+    lsd: 30
+    rec_state_dim: 200
+    num_layers: 1
+    hidden_size: 300
+    min_std: 0.1
+    activation: ELU
+    state_part_for_update: d

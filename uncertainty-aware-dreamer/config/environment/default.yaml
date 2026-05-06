@@ -1,0 +1,3 @@
+env:
+  action_repeat: 2
+  obs_type: img

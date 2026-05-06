@@ -1,0 +1,6 @@
+# Uncertainty-aware RSSM world model, using ensemble-based uncertainty estimates
+defaults:
+  - rssm
+  - _self_
+
+name: urssm

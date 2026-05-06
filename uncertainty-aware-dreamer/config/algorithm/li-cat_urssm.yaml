@@ -1,0 +1,35 @@
+# Uncertainty-aware latent imagination algorithm, utilizing the URSSM world model
+defaults:
+  - li-cat_rssm
+  - override world_model: cat_urssm
+  - _self_
+
+name: li-cat_urssm
+
+# --------------------------------------------
+# -------------- POLICY TRAINER --------------
+# --------------------------------------------
+policy_trainer:
+  # ensemble learning params
+  ensemble_learning_rate: 6e-4
+  ensemble_adam_epsilon: 1e-8
+  ensemble_clip_by_norm: True
+  ensemble_clip_norm: 100.0
+  ensemble_weight_decay: 0.0
+
+# --------------------------------------------
+# ----------------- ENSEMBLE -----------------
+# --------------------------------------------
+ensemble:
+  target: stoch             # deter, stoch, feat, or embed
+  num_ensemble: 5
+  hidden_size: 300
+  activation: ELU
+  normalization: LayerNorm
+  num_layers: 5
+  init_std: 1.0
+  min_std: 0.1
+  max_std: 5.0
+  sigmoid_activation: False
+  output_normalization:
+  distance_measure: gjs     # gjs or jrd

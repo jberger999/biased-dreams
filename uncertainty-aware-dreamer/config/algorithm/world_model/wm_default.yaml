@@ -1,0 +1,42 @@
+name: wm_default
+
+model:
+  # --------------------------------------
+  # -------------- ENCODERS --------------
+  # --------------------------------------
+  # det conv encoder for image observations
+  encoder0:
+    base_depth: 32
+    activation: ReLU
+  # det mlp encoder for proprioceptive observations
+  encoder1:
+    num_hidden: 3
+    hidden_size: 300
+    activation: ELU
+  # --------------------------------------
+  # -------------- DECODERS --------------
+  # --------------------------------------
+  use_phys_state_dec: True
+  # prob conv decoder for image observation predictions
+  decoder0:
+    base_depth: 32
+    activation: ReLU
+    output_std: 1.0
+  # prob mlp decoder with fixed variance for reward predictions
+  decoder1:
+    num_hidden: 3
+    hidden_size: 300
+    activation: ELU
+    output_std: 1.0
+  # prob mlp decoder with fixed variance for physical state predictions
+  decoder2:
+    num_hidden: 3
+    hidden_size: 300
+    activation: ELU
+    output_std: 1.0
+  # prob mlp decoder with fixed variance for proprioceptive observation predictions
+  decoder3:
+    num_hidden: 3
+    hidden_size: 300
+    activation: ELU
+    output_std: 1.0

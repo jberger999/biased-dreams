@@ -1,0 +1,23 @@
+defaults:
+  - _self_
+  - algorithm: li-rssm
+  - environment: cheetah_run
+  - override hydra/hydra_logging: disabled  # disable hydra logging
+  - override hydra/job_logging: disabled    # disable hydra job logging  
+
+seed: 0
+experiment: test-run
+deterministic: True
+
+save_model: True
+save_dataset: False
+half_way: False
+
+root_dir: ./out
+log_dir: ${root_dir}/${experiment}/${algorithm.name}/${environment.env.env}/${seed}/
+
+# suppress the creation of an output directory
+hydra:
+  output_subdir: null
+  run:
+    dir: .

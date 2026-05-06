@@ -1,0 +1,86 @@
+# --------------------------------------------
+# ------------------- MBRL -------------------
+# --------------------------------------------
+mbrl:
+  initial_data_collection:
+    seq_length: -1
+    num_sequences: 5
+  data_collection:
+    seq_length: -1
+    num_sequences: 1
+    action_noise_std: 0.3
+  mbrl_exp:
+    normalize_obs: True
+    model_updt_steps: 100
+    model_updt_seq_length: 50
+    model_updt_batch_size: 50
+  img_preprocessing:
+    color_depth_bits: 5
+    add_cb_noise: True
+  validation:
+    num_batches: 20
+    batch_size: 50
+
+# --------------------------------------------
+# ------------------ POLICY ------------------
+# --------------------------------------------
+policy:
+  use_det_features: True
+  mean_for_actor: False
+  actor:
+    num_hidden: 3
+    hidden_size: 300
+    activation: ELU
+    min_std: 1e-4
+    init_std: 5.0
+    mean_scale: 5.0
+  critic:
+    num_hidden: 3
+    hidden_size: 300
+    activation: ELU
+
+# --------------------------------------------
+# -------------- POLICY TRAINER --------------
+# --------------------------------------------
+policy_trainer:
+  # model learning params
+  model_learning_rate: 6e-4
+  model_adam_epsilon: 1e-8
+  model_clip_by_norm: True
+  model_clip_norm: 100.0
+  model_weight_decay: 0.0
+  # actor learning params
+  actor_learning_rate: 8e-5
+  actor_adam_epsilon: 1e-8
+  actor_clip_by_norm: True
+  actor_clip_norm: 100.0
+  actor_weight_decay: 0.0
+  # critic learning params
+  critic_learning_rate: 8e-5
+  critic_adam_epsilon: 1e-8
+  critic_clip_by_norm: True
+  critic_clip_norm: 100.0
+  critic_weight_decay: 0.0
+  # general training params
+  discount: 0.99
+  eval_interval: -1
+  objective:
+    decoder_loss_scales: [1.0, 1.0, 1.0]  # [img dec, reward dec, phys_state dec, (prop dec)]
+    kl:
+      scale_factor: 1.0                   # 0.1 in DreamerV2 for Atari
+      free_nats: 3.0
+      balanced: False
+      alpha: 0.8                          # not in used if not balanced
+
+# --------------------------------------------
+# ---------------- EVALUATION ----------------
+# --------------------------------------------
+reward_eval:
+  num_sequences: 10
+  eval_at_mean: False
+  max_sequence_length: -1
+  record_vid: False
+  save_path: null
+  eval_interval: 20
+  log_info:
+  render_kwargs:

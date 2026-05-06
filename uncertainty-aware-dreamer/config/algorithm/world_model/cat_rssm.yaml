@@ -1,0 +1,21 @@
+# Recurrent State Space Model with categorical latent space (cf. Hafner et al. 2022)
+defaults:
+  - wm_default
+  - _self_
+
+name: cat_rssm
+
+model:
+  # --------------------------------------
+  # ------------- TRANSITION -------------
+  # --------------------------------------
+  transition:
+    type: cat_rssm
+    rec_state_dim: 200          # 600 in DreamerV2
+    num_layers: 2               # 1 in DreamerV1
+    hidden_size: 300
+    activation: ELU
+    num_categoricals: 32
+    categorical_size: 32
+    with_obs_pre_layers: False
+    unimix_factor: 0            # disabling prob mixuture with uniform (0.01 in DreamerV3)

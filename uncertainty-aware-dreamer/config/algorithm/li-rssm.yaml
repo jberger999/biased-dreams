@@ -1,0 +1,16 @@
+# Latent imagination algorithm with RSSM world model (= original Dreamer)
+defaults:
+  - mb-rssm_default
+  - world_model: rssm
+  - _self_
+
+name: li-rssm
+
+# --------------------------------------------
+# -------------- POLICY TRAINER --------------
+# --------------------------------------------
+policy_trainer:
+  # general training params
+  lambda_: 0.95
+  imagine_horizon: 15
+  entropy_bonus: 0.0
